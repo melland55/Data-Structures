@@ -1,6 +1,7 @@
 #include "dstring.h"
 #include <cstring>
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -12,7 +13,7 @@ DString::DString()
 }
 
 //String Constructor with c-string argument
-DString::DString(char* cstring)
+DString::DString(const char* cstring)
 {
     length = strlen(cstring);
     data = new char[length + 1];
@@ -20,9 +21,9 @@ DString::DString(char* cstring)
 }
 
 //String constructor with another DString as the argument
-DString::DString(DString& str)
+DString::DString(const DString &str)
 {
-    length = str.getLength();
+    //length = strlen(str.length);
     data = new char[length + 1];
     strcpy(data, str.data);
 }
@@ -53,6 +54,35 @@ ostream &operator<<(ostream &out, const DString &str){
 istream &operator<<(istream &in, const DString &str){
     return in>>str.data;
 }
+
+bool operator==(const DString &str1, const DString &str2){
+    if(strcmp(str1.data, str2.data) == 0){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+bool operator==(const DString &str1, const char* c){
+    if(strcmp(str1.data, c) == 0){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+vector<DString> DString::separate(){
+    char *str = strtok(data, " ");
+    vector<DString> wordList;
+    while(str != NULL){
+        DString *word = new DString(str);
+        wordList.push_back(*word);
+        str = strtok(NULL, " ");
+    }
+    return wordList;
+}
+
+
 
 
 
