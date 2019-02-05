@@ -1,7 +1,10 @@
 #include "dstring.h"
 #include <cstring>
 #include <iostream>
+#include <fstream>
 #include <vector>
+#include <stdio.h>
+#include <ctype.h>
 
 using namespace std;
 
@@ -23,7 +26,7 @@ DString::DString(const char* cstring)
 //String constructor with another DString as the argument
 DString::DString(const DString &str)
 {
-    //length = strlen(str.length);
+    length = strlen(str.data);
     data = new char[length + 1];
     strcpy(data, str.data);
 }
@@ -34,24 +37,32 @@ int DString::getLength(){
 }
 
 DString & DString::operator=(DString& str){
-    delete []data;
-    data = new char[str.length + 1];
-    memcpy(data, str.data, str.length + 1);
+    if(this != &str){
+        delete []data;
+        data = new char[str.length + 1];
+        strcpy(data, str.data);
+        length = str.length;
+    }
     return *this;
 }
 
-DString & DString::operator=(char* c){
+DString::~DString(){
     delete []data;
-    data = new char[strlen(c)];
-    memcpy(data, c, strlen(c) + 1);
-    return *this;
+}
+
+DString & DString::operator=(char* c){
+        delete []data;
+        data = new char[strlen(c) + 1];
+        strcpy(data, c);
+        length = strlen(c);
+        return *this;
 }
 
 ostream &operator<<(ostream &out, const DString &str){
     return out<<str.data;
 }
 
-istream &operator<<(istream &in, const DString &str){
+istream &operator>>(istream &in, const DString &str){
     return in>>str.data;
 }
 
@@ -71,6 +82,36 @@ bool operator==(const DString &str1, const char* c){
     }
 }
 
+DString &DString::operator+=(DString str){
+    char* temp = new char[length + str.getLength()];
+    for(int i = 0; i <= length; i++){
+        temp[i] = data[i];
+    }
+    for(int i = length; i <= str.length + length; i++){
+        temp[i] = str.data[i - length];
+    }
+    delete []data;
+    data = new char[strlen(temp)];
+    strcpy(data, temp);
+    length = strlen(temp);
+    return *this;
+}
+
+DString &DString::operator+(DString str){
+    char* temp = new char[length + str.getLength()];
+    for(int i = 0; i <= length; i++){
+        temp[i] = data[i];
+    }
+    for(int i = length; i <= str.length + length; i++){
+        temp[i] = str.data[i - length];
+    }
+    delete []data;
+    data = new char[strlen(temp)];
+    strcpy(data, temp);
+    length = strlen(temp);
+    return *this;
+}
+
 vector<DString> DString::separate(){
     char *str = strtok(data, " ");
     vector<DString> wordList;
@@ -82,8 +123,59 @@ vector<DString> DString::separate(){
     return wordList;
 }
 
+void DString::lowercase(){
+    for(int i = 0; i <= length; i++){
+        data[i] = tolower(data[i]);
+    }
+}
 
+void DString::removeQuotes(){
+    int count = 0;
+    for(int i = 0; i <= length; i++){
+        if(data[i] == '\"'){
+            count++;
+        }
+    }
+    char* temp = new char[length - count];
+    int sum = 0;
+    for(int i = 0; i <= length; i++){
+        if(data[i] != '\"'){
+            temp[sum] = data[i];
+            sum++;
+        }
+    }
+    delete []data;
+    data = new char[sum];
+    for(int i = 0; i <= sum; i++){
+        data[i] = temp[i];
+    }
+    length = sum - count;
+}
 
+void DString::removeNum(){
+    int sum = 0;
+    for(int i = 0; i <= length; i++){
+        if(islower(data[i])){
+            sum++;
+        }
+    }
+
+    char* temp = new char[sum];
+    sum = 0;
+    for(int i = 0; i <= length; i++){
+        if(islower(data[i])){
+            temp[sum] = data[i];
+            sum++;
+        }
+    }
+
+    delete []data;
+    data = new char[strlen(temp)];
+    strcpy(data, temp);
+    for(int i = 0; i <= strlen(data); i++){
+    }
+    length = strlen(temp);
+}
 
 
 
