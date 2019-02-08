@@ -36,7 +36,12 @@ int DString::getLength(){
     return length;
 }
 
-DString & DString::operator=(DString& str){
+void DString::setData(char *str){
+    strcpy(data, str);
+    length = strlen(data);
+}
+
+DString & DString::operator=(const DString& str){
     if(this != &str){
         delete []data;
         data = new char[str.length + 1];
@@ -62,8 +67,11 @@ ostream &operator<<(ostream &out, const DString &str){
     return out<<str.data;
 }
 
-istream &operator>>(istream &in, const DString &str){
-    return in>>str.data;
+istream &operator>>(istream &in, DString &str){
+    char* temp;
+    in >> temp;
+    str = temp;
+    return in;
 }
 
 bool operator==(const DString &str1, const DString &str2){
@@ -114,12 +122,12 @@ DString &DString::operator+(DString str){
 
 vector<DString> DString::separate(){
     char *str = strtok(data, " ");
-    vector<DString> wordList;
-    while(str != NULL){
-        DString *word = new DString(str);
-        wordList.push_back(*word);
-        str = strtok(NULL, " ");
-    }
+        vector<DString> wordList;
+        while(str != NULL){
+            DString *word = new DString(str);
+            wordList.push_back(*word);
+            str = strtok(NULL, " ");
+        }
     return wordList;
 }
 
@@ -154,7 +162,11 @@ void DString::removeQuotes(){
 
 void DString::removeNum(){
     int sum = 0;
+
     for(int i = 0; i <= length; i++){
+        if(isupper(data[i])){
+            data[i] = tolower(data[i]);
+        }
         if(islower(data[i])){
             sum++;
         }
@@ -172,9 +184,20 @@ void DString::removeNum(){
     delete []data;
     data = new char[strlen(temp)];
     strcpy(data, temp);
-    for(int i = 0; i <= strlen(data); i++){
+    for(unsigned int i = 0; i <= strlen(data); i++){
     }
     length = strlen(temp);
+}
+
+vector<DString> DString::parseCSV(){
+    char *str = strtok(data, ",");
+        vector<DString> wordList;
+        while(str != NULL){
+            DString *word = new DString(str);
+            wordList.push_back(*word);
+            str = strtok(NULL, ",");
+        }
+    return wordList;
 }
 
 

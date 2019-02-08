@@ -11,7 +11,8 @@ public:
     DString(const char*);
     DString(const DString&);
     int getLength();
-    DString &operator=(DString&);
+    void setData(char *str);
+    DString &operator=(const DString&);
     ~DString();
     DString &operator=(char*);
     friend ostream &operator<<(ostream &out, const DString &str);
@@ -24,9 +25,11 @@ public:
     void lowercase();
     void removeQuotes();
     void removeNum();
+    void inFile(ifstream& in);
+    vector<DString> parseCSV();
 private:
-    char* data;
     int length;
+    char* data;
 };
 
 
