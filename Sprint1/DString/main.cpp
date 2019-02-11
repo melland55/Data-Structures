@@ -1,9 +1,14 @@
+#define CATCH_CONFIG_RUNNER
+#define TEST true
+#include "catch.hpp"
 #include <iostream>
 #include <fstream>
 #include <vector>
 #include <cstring>
 #include <cstdlib>
 #include "dstring.h"
+
+
 
 using namespace std;
 
@@ -15,8 +20,20 @@ vector<int> scores;
 vector<int> counts;
 int sum = 0;
 
+int runCatchTests(int argc, char* const argv[])
+{
+    //This line of code causes the Catch library to
+    //run the tests in the project.
+    return Catch::Session().run();
+}
+
 int main(int argc, char* argv[])
 {
+    if (TEST)
+        {
+            return runCatchTests(argc, argv);
+        }
+
     char *fileName;
     ofstream outFile;
     ifstream intesttweet;

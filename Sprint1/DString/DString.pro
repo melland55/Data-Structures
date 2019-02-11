@@ -5,7 +5,9 @@ CONFIG -= qt
 
 SOURCES += \
         main.cpp \
-    dstring.cpp
+    dstring.cpp \
+    tests.cpp
 
 HEADERS += \
-    dstring.h
+    dstring.h \
+    catch.hpp
