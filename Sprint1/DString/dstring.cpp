@@ -36,11 +36,13 @@ int DString::getLength(){
     return length;
 }
 
+//Function to set data with char array as argument
 void DString::setData(char *str){
     strcpy(data, str);
     length = strlen(data);
 }
 
+//overloading operator = for comparison between DString and DString
 DString & DString::operator=(const DString& str){
     if(this != &str){
         delete []data;
@@ -51,10 +53,12 @@ DString & DString::operator=(const DString& str){
     return *this;
 }
 
+//function to delete data
 DString::~DString(){
     delete []data;
 }
 
+//overloading operator = to work with char arrays
 DString & DString::operator=(char* c){
         delete []data;
         data = new char[strlen(c) + 1];
@@ -120,6 +124,7 @@ DString &DString::operator+(DString str){
     return *this;
 }
 
+//seperates a DString by spaces into a vector of smaller DStrings
 vector<DString> DString::separate(){
     char *str = strtok(data, " ");
         vector<DString> wordList;
@@ -131,12 +136,14 @@ vector<DString> DString::separate(){
     return wordList;
 }
 
+//Makes DString all lower case
 void DString::lowercase(){
     for(int i = 0; i <= length; i++){
         data[i] = tolower(data[i]);
     }
 }
 
+//Removes double quotes from a DString
 void DString::removeQuotes(){
     int count = 0;
     for(int i = 0; i <= length; i++){
@@ -160,6 +167,7 @@ void DString::removeQuotes(){
     length = sum - count;
 }
 
+//Removes not alpha characters from a DString
 void DString::removeNum(){
     int sum = 0;
     for(int i = 0; i <= length; i++){
@@ -188,6 +196,7 @@ void DString::removeNum(){
     length = strlen(temp);
 }
 
+//Parses DString by commas into a vector of DStrings
 vector<DString> DString::parseCSV(){
     char *str = strtok(data, ",");
         vector<DString> wordList;

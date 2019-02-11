@@ -15,6 +15,7 @@ using namespace std;
 void addWord(DString str, int score);
 int getIndex(DString str);
 
+//Initializ vectors used to store words that appear in test and their usage
 vector<DString> words;
 vector<int> scores;
 vector<int> counts;
@@ -29,12 +30,16 @@ int runCatchTests(int argc, char* const argv[])
 
 int main(int argc, char* argv[])
 {
+<<<<<<< HEAD
     if (TEST)
         {
             return runCatchTests(argc, argv);
         }
 
     char *fileName;
+=======
+    //opening all files required through command line arguments
+>>>>>>> 77bed8a6ab6f92c38d735eb69644c31fc397ae73
     ofstream outFile;
     ifstream intesttweet;
     ifstream intweet;
@@ -54,6 +59,7 @@ int main(int argc, char* argv[])
     char *point = new char[100];
     inid.getline(point, 300);
     int num;
+    //loops through test tweets to find correlaltions between words and their sentiment
     for(unsigned int i = 0; i <= 10000; i++){
         inid.getline(point, 300);
         DString y = point;
@@ -77,6 +83,7 @@ int main(int argc, char* argv[])
 
 
     intesttweet.getline(temp, 2000);
+    //cycles through file to find sentiment
     while(intesttweet.getline(point, 300)){
         int score = 0;
         int index;
@@ -101,6 +108,7 @@ int main(int argc, char* argv[])
     }
 }
 
+//Adds a word to the vector words, if it already exsists it adds its sentiment to scores
 void addWord(DString str, int score){
     bool dec = true;
     for(unsigned int i = 0; i < words.size(); i++){
@@ -116,7 +124,7 @@ void addWord(DString str, int score){
         counts.push_back(1);
     }
 }
-
+//returns index of word in the vector Words
 int getIndex(DString str){
     for(int i = 0; i < words.size(); i++){
         if(str == words[i]){
