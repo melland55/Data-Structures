@@ -162,7 +162,6 @@ void DString::removeQuotes(){
 
 void DString::removeNum(){
     int sum = 0;
-
     for(int i = 0; i <= length; i++){
         if(isupper(data[i])){
             data[i] = tolower(data[i]);
