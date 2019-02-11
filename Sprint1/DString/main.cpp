@@ -41,7 +41,6 @@ int main(int argc, char* argv[])
         inid.getline(point, 300);
         DString y = point;
         csv = y.parseCSV();
-        cout << csv[0] << endl;
         if(csv[1] == "0"){
             num = -1;
         }else{
