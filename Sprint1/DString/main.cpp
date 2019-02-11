@@ -1,5 +1,4 @@
 #define CATCH_CONFIG_RUNNER
-#define TEST true
 #include "catch.hpp"
 #include <iostream>
 #include <fstream>
@@ -30,16 +29,16 @@ int runCatchTests(int argc, char* const argv[])
 
 int main(int argc, char* argv[])
 {
-<<<<<<< HEAD
+    bool TEST = false;
+    if(argc == 1){
+        TEST = true;
+    }
     if (TEST)
         {
             return runCatchTests(argc, argv);
         }
 
-    char *fileName;
-=======
     //opening all files required through command line arguments
->>>>>>> 77bed8a6ab6f92c38d735eb69644c31fc397ae73
     ofstream outFile;
     ifstream intesttweet;
     ifstream intweet;
