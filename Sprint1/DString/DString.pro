@@ -10,4 +10,5 @@ SOURCES += \
 
 HEADERS += \
     dstring.h \
-    catch.hpp
+    catch.hpp \
+    catch_copy.hpp
