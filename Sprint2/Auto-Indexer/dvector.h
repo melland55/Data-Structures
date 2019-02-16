@@ -11,6 +11,7 @@ public:
     ~DVector();
     DVector(unsigned int len);
     DVector<T>(const DVector<T>& temp);
+    DVector<T> &operator=(const DVector<T>& temp);
     T& operator[](unsigned int x) const;
     void insert(int loc, T val);
     void remove(unsigned int loc);

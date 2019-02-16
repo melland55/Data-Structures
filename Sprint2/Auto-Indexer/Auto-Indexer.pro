@@ -22,5 +22,5 @@ HEADERS += \
 SOURCES += \
         main.cpp \
         dstring.cpp \
-        dvector.cpp \
+        dvector.cpp
         #tests.cpp

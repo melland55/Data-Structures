@@ -8,7 +8,6 @@
 #include "dstring.h"
 
 
-
 using namespace std;
 
 void addWord(DString str, int score);

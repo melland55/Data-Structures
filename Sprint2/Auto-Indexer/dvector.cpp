@@ -32,6 +32,17 @@ DVector<T>::DVector(const DVector<T>& temp){
 }
 
 template <class T>
+DVector<T>& DVector<T>::operator=(const DVector<T>& temp){
+    delete []data;
+    size = temp.getSize();
+    capacity = size + 1;
+    data = new T[size + 1];
+    for(int i = 0; i < size; i++){
+        data[i] = temp[i];
+    }
+}
+
+template <class T>
 DVector<T>::~DVector(){
     delete []data;
 }
@@ -120,6 +131,7 @@ void DVector<T>::resize(){
     capacity *= 2;
 }
 
+
 template <class T>
 void DVector<T>::sortVec(){
     sort(data, data + size);
@@ -135,6 +147,8 @@ int DVector<T>::getSize() const{
     return size;
 }
 
+
+
 template class DVector<int>;
 template class DVector<DString>;
-template class DVector<pair<DString, int>>;
+template class DVector<pair<DString, DString>>;

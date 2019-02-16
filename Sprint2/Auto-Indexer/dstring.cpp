@@ -1,10 +1,11 @@
-#include "dstring.h"
 #include <cstring>
 #include <iostream>
 #include <fstream>
 #include <vector>
 #include <stdio.h>
 #include <ctype.h>
+#include "dvector.h"
+#include "dstring.h"
 
 using namespace std;
 
@@ -230,6 +231,49 @@ vector<DString> DString::parseCSV(){
             str = strtok(NULL, ",");
         }
     return wordList;
+}
+
+DVector<DString> DString::parseIndex(){
+    DVector<DString> wordList;
+    char* temp = new char[length + 1];
+    strcpy(temp, data);
+    char *str = strtok(temp, " ");
+    while(str != NULL){
+        DString *word = new DString(str);
+        wordList.pushback(*word);
+        str = strtok(NULL, " ");
+    }
+    int sum = 0;
+    for(int i = 0; i < wordList.getSize(); i++){
+        if(wordList[i].getData()[0] == '['){
+            wordList[i] += " ";
+            int j = i + 1;
+            while(wordList[j].getData()[wordList[j].getLength() - 1] != ']'){
+                wordList[i] += wordList[j];
+                wordList.remove(j);
+                wordList[i] += " ";
+            }
+            wordList[i] += wordList[j];
+            wordList.remove(j);
+        }
+    }
+    length = strlen(data);
+    return wordList;
+}
+
+void DString::removeBrackets(){
+    if(data[0] == '[' || data[0] == '<'){
+        length = strlen(data);
+        char temp[length - 2];
+        for(int i = 1; i < length - 1; i++){
+            temp[i - 1] = data[i];
+        }
+        temp[length - 2] = NULL;
+        delete []data;
+        data = new char[strlen(temp)];
+        length -= 2;
+        strcpy(data, temp);
+    }
 }
 
 
