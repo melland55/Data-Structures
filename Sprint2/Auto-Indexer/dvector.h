@@ -1,7 +1,10 @@
 #ifndef DVECTOR_H
 #define DVECTOR_H
+#include <utility>
 
 using namespace std;
+
+
 
 template <class T>
 class DVector

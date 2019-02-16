@@ -10,6 +10,11 @@
 
 using namespace std;
 
+bool sortbyboth(const pair<DString,DString> &a, const pair<DString,DString> &b)
+{
+    return (a.second < b.second);
+}
+
 int main(int argc, char *argv[])
 {
 
@@ -27,12 +32,6 @@ int main(int argc, char *argv[])
     infile.open(argv[1]);
     outfile.open(argv[2]);
 
-
-    /*ifstream infile;
-    infile.open("/home/student/Desktop/CSE2341-19S-Andrew-Melland/Sprint2/Auto-Indexer/test");
-    if(!infile.is_open()){
-        cout << "fail" << endl;
-    }*/
 
     DVector<pair<DString, DString>> index;
 
@@ -61,13 +60,14 @@ int main(int argc, char *argv[])
 
     for(int i = 0; i + 1 < index.getSize(); i++){
         if(index[i].first == index[i + 1].first){
-            index[i].second += ", ";
-            index[i].second += index[i + 1].second;
+            if(!(index[i].second == index[i + 1].second)){
+                index[i].second += ", ";
+                index[i].second += index[i + 1].second;
+            }
             index.remove(i + 1);
             i--;
         }
     }
-
     char last = 'z';
     for(int i = 0; i < index.getSize(); i++){
         if(index[i].first.getData()[0] != last){
