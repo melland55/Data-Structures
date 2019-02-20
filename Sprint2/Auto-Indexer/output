@@ -1,21 +1,21 @@
-<2>
+[2]
 2-3 tree: 1
-<A>
+[A]
 algorithm: 1, 15
 analysis: 1, 15
-<B>
+[B]
 b+ tree: 5
 binary search tree: 1
-binary tree: 15, 5
-<C>
+binary tree: 5, 15
+[C]
 clique: 8
 complete binary tree: 5
 complexity: 1
-<F>
+[F]
 full binary tree: 5
-<G>
+[G]
 graph: 8
-<H>
+[H]
 heap: 15
-<T>
+[T]
 tree: 5, 8

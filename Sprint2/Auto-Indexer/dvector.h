@@ -24,6 +24,7 @@ public:
     int getSize() const;
     void resize();
     void sortVec();
+    void sortManual();
 private:
     T* data;
     int capacity;

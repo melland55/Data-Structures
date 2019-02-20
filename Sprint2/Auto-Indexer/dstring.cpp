@@ -75,7 +75,7 @@ DString & DString::operator=(char* c){
 bool operator>(DString x, DString y){
     int z;
     z = strcmp(x.getData(), y.getData());
-    if(z < 0){
+    if(z <= 0){
         return false;
     }else{
         return true;

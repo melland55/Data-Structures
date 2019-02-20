@@ -1,5 +1,6 @@
 #include "dvector.h"
 #include "dstring.h"
+#include "tupple.h"
 #include <algorithm>
 #include <iterator>
 #include <array>
@@ -137,6 +138,7 @@ void DVector<T>::sortVec(){
     sort(data, data + size);
 }
 
+
 template <class T>
 T* DVector<T>::getData() const{
     return data;
@@ -151,4 +153,4 @@ int DVector<T>::getSize() const{
 
 template class DVector<int>;
 template class DVector<DString>;
-template class DVector<pair<DString, DString>>;
+template class DVector<tupple>;

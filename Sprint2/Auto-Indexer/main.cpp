@@ -1,5 +1,6 @@
 #include "dvector.h"
 #include "dstring.h"
+#include "tupple.h"
 #include <iostream>
 #include <array>
 #include <utility>
@@ -9,11 +10,6 @@
 
 
 using namespace std;
-
-bool sortbyboth(const pair<DString,DString> &a, const pair<DString,DString> &b)
-{
-    return (a.second < b.second);
-}
 
 int main(int argc, char *argv[])
 {
@@ -33,7 +29,7 @@ int main(int argc, char *argv[])
     outfile.open(argv[2]);
 
 
-    DVector<pair<DString, DString>> index;
+    DVector<tupple> index;
 
     DString num;
     char* temp = new char[80];
@@ -47,7 +43,7 @@ int main(int argc, char *argv[])
             x = temp;
             DVector<DString> y = x.parseIndex();
             for(int i = 0; i < y.getSize(); i++){
-                pair<DString, DString> z;
+                tupple z;
                 y[i].removeBrackets();
                 y[i].lowercase();
                 z.first = y[i];
@@ -56,13 +52,15 @@ int main(int argc, char *argv[])
             }
         }
     }
+
     index.sortVec();
 
     for(int i = 0; i + 1 < index.getSize(); i++){
         if(index[i].first == index[i + 1].first){
             if(!(index[i].second == index[i + 1].second)){
-                index[i].second += ", ";
-                index[i].second += index[i + 1].second;
+                    index[i].second += ", ";
+                    index[i].second += index[i + 1].second;
+
             }
             index.remove(i + 1);
             i--;
@@ -73,9 +71,9 @@ int main(int argc, char *argv[])
         if(index[i].first.getData()[0] != last){
             last = index[i].first.getData()[0];
             if(isdigit(last)){
-                outfile << "<" << last << ">" << endl;
+                outfile << "[" << last << "]" << endl;
             }else{
-                outfile << "<" << (char)toupper(last) << ">" << endl;
+                outfile << "[" << (char)toupper(last) << "]" << endl;
             }
         }
         outfile << index[i].first << ": " << index[i].second << endl;
