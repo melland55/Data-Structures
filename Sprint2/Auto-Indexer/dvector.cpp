@@ -15,6 +15,7 @@ DVector<T>::DVector(){
     size = 0;
 }
 
+//Constructor that creates dvector of size and capacity len
 template <class T>
 DVector<T>::DVector(unsigned int len){
     size = len;
@@ -22,41 +23,24 @@ DVector<T>::DVector(unsigned int len){
     data = new T[len + 1];
 }
 
-template <class T>
-DVector<T>::DVector(const DVector<T>& temp){
-    size = temp.getSize();
-    capacity = size + 1;
-    data = new T[size + 1];
-    for(int i = 0; i < size; i++){
-        data[i] = temp[i];
-    }
-}
-
-template <class T>
-DVector<T>& DVector<T>::operator=(const DVector<T>& temp){
-    delete []data;
-    size = temp.getSize();
-    capacity = size + 1;
-    data = new T[size + 1];
-    for(int i = 0; i < size; i++){
-        data[i] = temp[i];
-    }
-}
-
+//Delete constructor
 template <class T>
 DVector<T>::~DVector(){
     delete []data;
 }
 
+//returns element at index [x] of vector
 template <class T>
 T& DVector<T>::operator[](unsigned int x) const{
     if(x >= size){
+        return data[0];
         //throw exception("Out of bounds");
     }else{
         return data[x];
     }
 }
 
+//Inserts elemetn val at index loc in vector
 template <class T>
 void DVector<T>::insert(int loc, T val){
     size++;
@@ -76,6 +60,7 @@ void DVector<T>::insert(int loc, T val){
     capacity = size;
 }
 
+//removes element at index of  loc
 template <class T>
 void DVector<T>::remove(unsigned int loc){
     size--;
@@ -94,6 +79,7 @@ void DVector<T>::remove(unsigned int loc){
     capacity = size;
 }
 
+//adds new element to back of vector
 template <class T>
 void DVector<T>::pushback(T val){
     if(size == capacity){
@@ -103,6 +89,7 @@ void DVector<T>::pushback(T val){
     size++;
 }
 
+//removes last element of vector
 template <class T>
 void DVector<T>::popback(){
     size--;
@@ -118,6 +105,8 @@ void DVector<T>::popback(){
     }
 }
 
+
+//Resizes the capacity of the vector by double its previous capacity
 template <class T>
 void DVector<T>::resize(){
     T temp[size];
@@ -132,18 +121,19 @@ void DVector<T>::resize(){
     capacity *= 2;
 }
 
-
+//Sorts through the vector
 template <class T>
 void DVector<T>::sortVec(){
     sort(data, data + size);
 }
 
-
+//returns data
 template <class T>
 T* DVector<T>::getData() const{
     return data;
 }
 
+//returns size of vector
 template <class T>
 int DVector<T>::getSize() const{
     return size;
@@ -152,5 +142,6 @@ int DVector<T>::getSize() const{
 
 
 template class DVector<int>;
+template class DVector<char>;
 template class DVector<DString>;
 template class DVector<tupple>;

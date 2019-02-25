@@ -17,12 +17,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 HEADERS += \
         dstring.h \
         dvector.h \
-        catch.hpp \
-    tupple.h
+        tupple.h \
+        catch.hpp
 
 SOURCES += \
         main.cpp \
         dstring.cpp \
         dvector.cpp \
-    tupple.cpp
-        #tests.cpp
+        tupple.cpp \
+    tests.cpp

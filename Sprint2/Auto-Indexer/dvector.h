@@ -12,9 +12,7 @@ class DVector
 public:
     DVector();
     ~DVector();
-    DVector(unsigned int len);
-    DVector<T>(const DVector<T>& temp);
-    DVector<T> &operator=(const DVector<T>& temp);
+    DVector<T>(unsigned int len);
     T& operator[](unsigned int x) const;
     void insert(int loc, T val);
     void remove(unsigned int loc);
@@ -24,7 +22,6 @@ public:
     int getSize() const;
     void resize();
     void sortVec();
-    void sortManual();
 private:
     T* data;
     int capacity;

@@ -243,7 +243,6 @@ DVector<DString> DString::parseIndex(){
         wordList.pushback(*word);
         str = strtok(NULL, " ");
     }
-    int sum = 0;
     for(int i = 0; i < wordList.getSize(); i++){
         if(wordList[i].getData()[0] == '['){
             wordList[i] += " ";
