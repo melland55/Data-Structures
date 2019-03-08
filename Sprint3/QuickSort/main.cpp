@@ -4,7 +4,7 @@
 
 using namespace std;
 
-//Declaring global functions an variables
+//Declaring global functions and variables
 void quicksort(char arr[][31], int beg, int end);
 int getSize(char arr[]);
 int n, x;
@@ -20,7 +20,7 @@ int main(int argc, char *argv[]){
     //Get number of words(n) and number of words to sort(x)
     infile >> n >> x;
 
-    //Declaring array with size of max size of possible word
+    //Declaring array with size of max possible word size
     char arr[n][31] = {"0"};
     //Array to hold newly parced words from file
     char temp[31];
@@ -32,7 +32,7 @@ int main(int argc, char *argv[]){
         strcpy(arr[i], temp);
     }
 
-    //Calls the function quicksort that sorts the array from index 0 to index of n
+    //Calls the function quicksort that sorts the array from index 0 to index of n inclusively
     quicksort(arr, 0, n);
     //Outputs resulting sorted arr to output file
     for(int i = 0; i < x; i++){
@@ -72,6 +72,7 @@ void quicksort(char arr[][31], int beg, int end)
 //Returns number of elements in arr
 int getSize(char arr[]){
     int sum = 0;
+    //Loops through char array and returns the number of characters when it reaches a NULL terminator
     for(int i = 0; i < 31; i++){
         if(arr[i] == '\0'){
             return sum;
