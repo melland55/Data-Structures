@@ -14,16 +14,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-SOURCES += \
-        main.cpp \
-    node.cpp \
-    list.cpp \
-    city.cpp \
-    flight.cpp
-
 HEADERS += \
-    node.h \
+        catch.hpp \
     list.h \
     city.h \
-    flight.h
+    flight.h \
+    adjacencylist.h \
+    stack.h
 
+SOURCES += \
+        main.cpp \
+    test.cpp \
+    city.cpp \
+    flight.cpp \
+    adjacencylist.cpp \
+    stack.cpp

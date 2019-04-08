@@ -8,7 +8,10 @@ class City
 {
 public:
     City();
+    ~City();
     City(char* str);
+    City(const City &city);
+    City& operator=(const City& city);
     char* name;
     List<Flight> data;
 };
